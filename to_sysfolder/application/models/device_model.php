@@ -159,7 +159,7 @@ class Device_model extends CI_Model {
 	// Update device and server key.
 	$client = exosense_client($this,
 				  'exodm:update-device',
-				  array('device-id' => $device_id,
+				  array('dev-id' => $device_id,
 					'server-key' => $device_key,
 					'device-key' => $server_key));
 	$client->send_request();
@@ -270,7 +270,7 @@ class Device_model extends CI_Model {
     {
 	$client = exosense_client($this,
 				  'exodm:lookup-device',
-				  array('device-id' => $dev_id));
+				  array('dev-id' => $dev_id));
 
 	$res = $client->send_request();
 	if (!$res) {
@@ -280,11 +280,11 @@ class Device_model extends CI_Model {
 	$res = $client->get_response_object();
 
 	$device = $res['result']['devices'][0];
-	$device['devid'] = $device['device-id'];
+	$device['devid'] = $device['dev-id'];
 	$device['device_type'] = $device['device-type'];
 
 	// Load db description for the current device.
-	$this->db->where('device_id', $device['device-id']);
+	$this->db->where('device_id', $device['dev-id']);
 	$query = $this->db->get('device');
 	if ($query->num_rows()  == 0) {
 	    $device['description'] = '??';

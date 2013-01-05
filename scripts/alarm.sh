@@ -14,12 +14,16 @@ then
     exit 255
 fi
 
-AUTH=demo:exosense_demo
+
+if [ "$AUTH" != "" ]
+then
+    AUTHCMD=-u
+fi
 
 dev_id=$1
 frame_id=$2
 value=$3
-curl -u $AUTH --request POST $URL -d @- <<EOF
+curl $AUTHCMD $AUTH --request POST $URL -d @- <<EOF
 {
     "json-rpc": "2.0",
     "method": "process-alarms",

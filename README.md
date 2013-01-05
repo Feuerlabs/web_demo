@@ -12,31 +12,31 @@ and manage devices in an exosense server. The web demo uses the following techno
 
 - php5<br>
 Core language usage.
-
--php5-gd<br>
+<br>
+- php5-gd<br>
 Graphics library used by libchart, see below
-
+<br>
 - postgres 8.4 (or later)<br>
 SQL database used for local storage
-
+<br>
 - php5-pgsql<br>
 Postgres integration from php
-
+<br>
 - apache<br>
 Web server
-
+<br>
 - Codeigniter 2.1.3 (Provided by webdemo)<br>
 http://ellislab.com/codeigniter
 Simple webapp framework on top of PHP.
-
+<br>
 - CodeIgniter Google Maps V3 API Library 2012-12-27 (no version tag)<br>
 http://biostall.com/codeigniter-google-maps-v3-api-library
 Integrates code igniter with Google maps. Used for waypoint plotting
-
+<br>
 - libchart 1.3<br>
 http://naku.dohcrew.com/libchart/pages/introduction/
 Used to render line charts for log data. Patched in very minor way by Feuerlabs
-
+<br>
 - Code Igniter JSON-RPC 1.0<br>
 http://ellislab.com/forums/viewthread/98953/
 Modified by Feuerlabs to use php-curl in order to get https support.
@@ -55,8 +55,8 @@ Additional packages and/or different versions may be needed.
 
 ## [Prepare] Unpack the web demo on the target host
 
-This INSTALL.md file should be in the unpacked directory,
-which will be called *$UNPACK* from now on
+This README.md file should be in the unpacked directory,
+which will be called **$UNPACK** from now on
 
 ## [Prepare] Create a system folder for php files,
 This folder should be outside the web root and should be owned
@@ -66,7 +66,7 @@ A suggestion is
 
     /var/local/fl_demo
 
-This direcotry is called *$SYSFOLD* from now on
+This direcotry is called **$SYSFOLD** from now on
 
 
 ## [Prepare] Clean out webroot
@@ -75,11 +75,17 @@ This is the top directory where apache will serve pages from. It is usually set 
 
     /var/www
 
-This directory is called *$WEBROOT* from now on.
+This directory is called **$WEBROOT** from now on.
 
 After checking that $WEBROOT does not contain anything worth to be saved, remove all files in that director with:
 
     rm -rf $WEBROOT/*
+
+
+## [Prepare] Create $WEBROOT/generated
+This directory will host the graphs displayed when detailed views of a device log is selected.
+
+    mkdir $WEBROOT/generated
 
 
 ## [DB] Create a database user for the web demo
@@ -245,13 +251,12 @@ Please note that $UNPACK/config/routes.php can be left as is
 
 ## [Install] Set the correct owner on $WEBROOT and $SYSFOLD
 
-Find out what user Apache runs as, and which default group that user has. In
-the example below, we will use www-data for both the user and the group name.
-
+Find out what user Apache runs as, and which default group that user has.
 Do recursive ownership change of all files in $WEBROOT and $SYSFOLD
 
-    chown -R www-data.www-data $WEBROOT $SYSFOLD
+    chown -R www-user.www-group $WEBROOT $SYSFOLD
 
+Replace the www-user and www-group above with the apache runtime user and group.
 
 ## [Exosense] Upload Demo.yang to the exosense server
 
@@ -292,33 +297,33 @@ Click on Add Device and setup a device with the following fields:
 
 - DeviceID<br>
 A string between 1 and 64 characters.
-
+<br>
 - DeviceType<br>
 A drop down meny with all available device types provisioned in the Exosense Server
-
+<br>
 - Description<br>
 A text decribing the device.
-
+<br>
 - Server Key
 The Server side authentication key. Numeric 64bit int
-
+<br>
 - Device Key
 The Server side authentication key. Numeric 64bit int
-
+<br>
 - Waypoint Interval
 The interval, in meters, between each logged waypoint.
-
+<br>
 - CAN Bus Speed
 The baudrate of the CAN Bus of the device.
-
+<br>
 - CAN frame ID size
 The number of bits that the Frame ID occupies in each CAN message.
-
+<br>
 - Retry count
 The number of times that the device shall attempt to contact the
 server, should the latter not be available due to out-of-coverage
 situations.
-
+<br>
 - Retry Interval
 The number of seconds to wait between each connection retry.
 
@@ -365,23 +370,27 @@ Set the URL environment variable to point to the exosense JSON-RPC address manag
 
     export URL=http://vps.ulf.wiger.net/index.php/exosense
 
-Generate log data for the created device:
+If basic http authentication is used to access the web demo, the AUTH environment variable should be setup with the necessary credentials:
+
+    export AUTH=demo:exosense_demo
+
+If AUTH is not set, the scripts will acces the web demo without any credentials.
 
     cd $UNPACK/script
     sh log.sh <device-id> <can-frame-id> <min-val> <max-val> <nr_elem>
 
 - <device-id><br>
 Is the ID of the device created above.
-
+<br>
 - <can-frame-id><br>
 Is set to one of the CAN frame IDs given when the log specification for the device was setup
-
+<br>
 - <min-val><br>
 The minimum value for the CAN frame that should be generated.
-
+<br>
 - <max-val><br>
 The maximum value for the CAN frame that should be generated
-
+<br>
 - <nr_elem>
 The number of CAN frames that should be generated in the log.
 
@@ -399,10 +408,10 @@ Generate alarms for the created device:
 
 - <device-id><br>
 Is the ID of the device created above.
-
+<br>
 - <can-frame-id><br>
 Is set to one of the CAN frame IDs given when the alarm specification for the device was setup
-
+<br>
 - <can-value><br>
 The value that triggered the alarm. Should be between the trigger and
 reset thresholds specified for the given alarm.
@@ -421,7 +430,7 @@ Generate waypoints for the created device:
 
 - <device-id><br>
 Is the ID of the device created above.
-
+<br>
 - <waypoint-feed-file><br>
 A file with timestams, latitude and longitude waypoint records.
 
@@ -430,11 +439,11 @@ Each waypoint record in the feed file is separated by a newline and has the foll
     { "ts": "<timestamp>", "lat": "<latidute>", "lon": "<longitude>" }
 
 - <timestamps>
-A UTC timestamp with the number of seconds since the 1970-01-01 00:00:00. 
-
+A UTC timestamp with the number of seconds since the 1970-01-01 00:00:00.
+<br>
 - <latitude>
 A decimal latitude.
-
+<br>
 - <longitude>
 A decimal longitude.
 

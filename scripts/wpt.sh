@@ -14,11 +14,15 @@ then
     exit 255
 fi
 
-AUTH=demo:exosense_demo
+if [ "$AUTH" != "" ]
+then
+    AUTHCMD=-u
+fi
+
 
 cat $2 | while read LINE
 do
-curl -u $AUTH --request POST $URL -d @- <<EOF
+curl $AUTHCMD $AUTH --request POST $URL -d @- <<EOF
 {
     "json-rpc": "2.0",
     "method": "process-waypoints",

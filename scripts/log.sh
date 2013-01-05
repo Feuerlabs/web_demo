@@ -13,7 +13,11 @@ then
     exit 255
 fi
 
-AUTH=demo:exosense_demo
+if [ "$AUTH" != "" ]
+then
+    AUTHCMD=-u
+fi
+
 
 dev_id=$1
 frame_id=$2
@@ -24,7 +28,7 @@ cv=$min_val
 i=0
 while [ $i -lt $nr_elem ]
 do
-curl -u $AUTH --request POST $URL -d @- <<EOF
+curl $AUTHCMD $AUTH --request POST $URL -d @- <<EOF
 {
     "json-rpc": "2.0",
     "method": "process-logdata",
