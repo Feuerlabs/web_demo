@@ -377,24 +377,24 @@ If basic http authentication is used to access the web demo, the AUTH environmen
 If AUTH is not set, the scripts will acces the web demo without any credentials.
 
     cd $UNPACK/script
-    sh log.sh <device-id> <can-frame-id> <min-val> <max-val> <nr_elem>
+    sh log.sh [device-id] [can-frame-id] [min-val] [max-val] [nr_elem]
 
-- <device-id><br>
+- [device-id]<br>
 Is the ID of the device created above.
 <br><br>
-- <can-frame-id><br>
+- [can-frame-id]<br>
 Is set to one of the CAN frame IDs given when the log specification for the device was setup
 <br><br>
-- <min-val><br>
+- [min-val]<br>
 The minimum value for the CAN frame that should be generated.
 <br><br>
-- <max-val><br>
+- [max-val]<br>
 The maximum value for the CAN frame that should be generated
 <br><br>
-- <nr_elem>
+- [nr_elem]
 The number of CAN frames that should be generated in the log.
 
-The logged CAN frames will start at <min-val> and be incremented by one for each frame logged until <max-val> is reached. At that point the value is reset to <min-frame> and the process starts over until the given number of frames have been logged.
+The logged CAN frames will start at [min-val] and be incremented by one for each frame logged until [max-val] is reached. At that point the value is reset to <min-frame> and the process starts over until the given number of frames have been logged.
 
 
 ## Generate alarms
@@ -404,15 +404,15 @@ Ensure that the URL environment variable is setup as described above.
 Generate alarms for the created device:
 
     cd $UNPACK/script
-    sh log.sh <device-id> <can-frame-id> <can-value>
+    sh log.sh [device-id] [can-frame-id] [can-value]
 
-- <device-id><br>
+- [device-id]<br>
 Is the ID of the device created above.
 <br><br>
-- <can-frame-id><br>
+- [can-frame-id]<br>
 Is set to one of the CAN frame IDs given when the alarm specification for the device was setup
 <br><br>
-- <can-value><br>
+- [can-value]<br>
 The value that triggered the alarm. Should be between the trigger and
 reset thresholds specified for the given alarm.
 
@@ -426,25 +426,25 @@ Ensure that the URL environment variable is setup as described above.
 Generate waypoints for the created device:
 
     cd $UNPACK/script
-    sh waypoints.sh <device-id> <waypoint-feed-file>
+    sh waypoints.sh [device-id] [waypoint-feed-file]
 
-- <device-id><br>
+- [device-id]<br>
 Is the ID of the device created above.
 <br><br>
-- <waypoint-feed-file><br>
+- [waypoint-feed-file]<br>
 A file with timestams, latitude and longitude waypoint records.
 
 Each waypoint record in the feed file is separated by a newline and has the following format:
 
-    { "ts": "<timestamp>", "lat": "<latidute>", "lon": "<longitude>" }
+    { "ts": "[timestamp]", "lat": "[latitude]", "lon": "[longitude]" }
 
-- <timestamps>
+- [timestamp]
 A UTC timestamp with the number of seconds since the 1970-01-01 00:00:00.
 <br><br>
-- <latitude>
+- [latitude]
 A decimal latitude.
 <br><br>
-- <longitude>
+- [longitude]
 A decimal longitude.
 
 An example of a waypoint record is given below:
