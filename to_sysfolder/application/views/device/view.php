@@ -38,5 +38,5 @@
 
      </table>
 <div id="device_add">
-     <a href="/index.php/device/set" target="_blank">Add Device</a>
+     <a href="/index.php/device/set">Add Device</a>
 </div>

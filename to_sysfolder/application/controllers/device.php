@@ -29,6 +29,7 @@ class Device extends CI_Controller {
 	    $data['title'] = 'Create a new device';
 
 	$data['device_types'] = $this->device_model->list_device_types();
+	$data['home_url'] = $this->config->item('base_url');
 	$this->form_validation->set_rules('device_id', 'DeviceID', 'required');
 	$this->form_validation->set_rules('device_type', 'Device Type', 'required');
 	$this->form_validation->set_rules('description', 'description', 'required');

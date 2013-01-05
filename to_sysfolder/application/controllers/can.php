@@ -15,6 +15,7 @@ class Can extends CI_Controller {
 	log_message('debug', 'Can::view(1)');
 	$data['title'] = "View CAN Frames";
 	$data['can_list'] = $this->can_model->view();
+	$data['home_url'] = $this->config->item('base_url');
 	$this->load->view('templates/header', $data);
 	$this->load->view('can/view', $data);
 	$this->load->view('templates/footer');
@@ -27,12 +28,15 @@ class Can extends CI_Controller {
 	$this->load->helper('form');
 	$this->load->library('form_validation');
 
+
 	if ($can_id) {
 	    $data = $this->can_model->view($can_id);
 	    $data['title'] = 'Update existing CAN frame descriptor';
 	}
 	else
 	    $data['title'] = 'Create a new CAN frame descriptor';
+
+	$data['home_url'] = $this->config->item('base_url');
 
 	$this->form_validation->set_rules('frame_id', 'Can Frame ID', 'required');
 	$this->form_validation->set_rules('label', 'Label', 'required');

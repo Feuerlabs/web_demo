@@ -19,6 +19,7 @@ class Alarm extends CI_Controller {
 	log_message('debug', 'Alarm::view(2): '.print_r($data['alarm_list'], TRUE));
 
 	$data['title'] = "View Alarm Specification";
+	$data['home_url'] = $this->config->item('base_url');
 	$this->load->view('templates/header', $data);
 	$this->load->view('alarm/view', $data);
 	$this->load->view('templates/footer');
@@ -36,7 +37,7 @@ class Alarm extends CI_Controller {
 	$data['dev_id'] = $dev_id;
 	$data['can_frame_id'] = $can_frame_id;
 	$data['can_frames'] = $this->can_model->view();
-
+	$data['home_url'] = $this->config->item('base_url');
 	if ($can_frame_id) {
 	    $data['title'] = 'Update existing alarm specification';
 	    log_message('debug', 'Alarm::set(3)');

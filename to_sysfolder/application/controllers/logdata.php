@@ -31,6 +31,7 @@ class Logdata extends CI_Controller {
 	$data['title'] = "View Log data";
 	$data['dev_id'] = $dev_id;
 	$data['summary_list'] = &$summary;
+	$data['home_url'] = $this->config->item('base_url');
 	if ($graph_filename)
 	    $data['graph_filename'] = $graph_filename;
 

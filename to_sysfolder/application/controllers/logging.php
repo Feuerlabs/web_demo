@@ -19,6 +19,7 @@ class Logging extends CI_Controller {
 	log_message('debug', 'Logging::view(2): '.$data['logging_list']);
 
 	$data['title'] = "View Log Specification";
+	$data['home_url'] = $this->config->item('base_url');
 	$this->load->view('templates/header', $data);
 	$this->load->view('logging/view', $data);
 	$this->load->view('templates/footer');
@@ -36,6 +37,7 @@ class Logging extends CI_Controller {
 	$data['dev_id'] = $dev_id;
 	$data['can_frame_id'] = $can_frame_id;
 	$data['can_frames'] = $this->can_model->view();
+	$data['home_url'] = $this->config->item('base_url');
 
 	if ($can_frame_id) {
 	    $data['title'] = 'Update existing log specification';
