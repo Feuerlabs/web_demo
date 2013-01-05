@@ -12,31 +12,31 @@ and manage devices in an exosense server. The web demo uses the following techno
 
 - php5<br>
 Core language usage.
-<br>
+<br><br>
 - php5-gd<br>
 Graphics library used by libchart, see below
-<br>
+<br><br>
 - postgres 8.4 (or later)<br>
 SQL database used for local storage
-<br>
+<br><br>
 - php5-pgsql<br>
 Postgres integration from php
-<br>
+<br><br>
 - apache<br>
 Web server
-<br>
+<br><br>
 - Codeigniter 2.1.3 (Provided by webdemo)<br>
 http://ellislab.com/codeigniter
 Simple webapp framework on top of PHP.
-<br>
+<br><br>
 - CodeIgniter Google Maps V3 API Library 2012-12-27 (no version tag)<br>
 http://biostall.com/codeigniter-google-maps-v3-api-library
 Integrates code igniter with Google maps. Used for waypoint plotting
-<br>
+<br><br>
 - libchart 1.3<br>
 http://naku.dohcrew.com/libchart/pages/introduction/
 Used to render line charts for log data. Patched in very minor way by Feuerlabs
-<br>
+<br><br>
 - Code Igniter JSON-RPC 1.0<br>
 http://ellislab.com/forums/viewthread/98953/
 Modified by Feuerlabs to use php-curl in order to get https support.
@@ -297,33 +297,33 @@ Click on Add Device and setup a device with the following fields:
 
 - DeviceID<br>
 A string between 1 and 64 characters.
-<br>
+<br><br>
 - DeviceType<br>
 A drop down meny with all available device types provisioned in the Exosense Server
-<br>
+<br><br>
 - Description<br>
 A text decribing the device.
-<br>
+<br><br>
 - Server Key
 The Server side authentication key. Numeric 64bit int
-<br>
+<br><br>
 - Device Key
 The Server side authentication key. Numeric 64bit int
-<br>
+<br><br>
 - Waypoint Interval
 The interval, in meters, between each logged waypoint.
-<br>
+<br><br>
 - CAN Bus Speed
 The baudrate of the CAN Bus of the device.
-<br>
+<br><br>
 - CAN frame ID size
 The number of bits that the Frame ID occupies in each CAN message.
-<br>
+<br><br>
 - Retry count
 The number of times that the device shall attempt to contact the
 server, should the latter not be available due to out-of-coverage
 situations.
-<br>
+<br><br>
 - Retry Interval
 The number of seconds to wait between each connection retry.
 
@@ -381,16 +381,16 @@ If AUTH is not set, the scripts will acces the web demo without any credentials.
 
 - <device-id><br>
 Is the ID of the device created above.
-<br>
+<br><br>
 - <can-frame-id><br>
 Is set to one of the CAN frame IDs given when the log specification for the device was setup
-<br>
+<br><br>
 - <min-val><br>
 The minimum value for the CAN frame that should be generated.
-<br>
+<br><br>
 - <max-val><br>
 The maximum value for the CAN frame that should be generated
-<br>
+<br><br>
 - <nr_elem>
 The number of CAN frames that should be generated in the log.
 
@@ -408,10 +408,10 @@ Generate alarms for the created device:
 
 - <device-id><br>
 Is the ID of the device created above.
-<br>
+<br><br>
 - <can-frame-id><br>
 Is set to one of the CAN frame IDs given when the alarm specification for the device was setup
-<br>
+<br><br>
 - <can-value><br>
 The value that triggered the alarm. Should be between the trigger and
 reset thresholds specified for the given alarm.
@@ -430,7 +430,7 @@ Generate waypoints for the created device:
 
 - <device-id><br>
 Is the ID of the device created above.
-<br>
+<br><br>
 - <waypoint-feed-file><br>
 A file with timestams, latitude and longitude waypoint records.
 
@@ -440,10 +440,10 @@ Each waypoint record in the feed file is separated by a newline and has the foll
 
 - <timestamps>
 A UTC timestamp with the number of seconds since the 1970-01-01 00:00:00.
-<br>
+<br><br>
 - <latitude>
 A decimal latitude.
-<br>
+<br><br>
 - <longitude>
 A decimal longitude.
 
