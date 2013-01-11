@@ -1,9 +1,11 @@
 <html>
 <head>
 	<title>Exosense</title>
-        <link rel="stylesheet" type="text/css" href="/fldemo.css"/>
+        <link rel="stylesheet" type="text/css" href="http://www.feuermade.com/exosense/demo.css"/>
 </head>
 <body>
+<div id="co
+ntainer">
 <div id="header">
 Exosense
 </div>

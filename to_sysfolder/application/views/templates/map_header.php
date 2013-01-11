@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>Google Maps JavaScript API v3 Example: Map Simple</title>
+  <link rel="stylesheet" type="text/css" href="http://www.feuermade.com/exosense/demo.css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
   <style>
@@ -30,6 +31,7 @@
   </script>
 </head>
 <body>
+<div id="container">
 <h1>Exosense</h1>
 <h2><?php echo $title?></h2>
 <a href="/index.php/device/view" target="_self">Devices</a>|
