@@ -58,8 +58,8 @@ class Logging_model extends CI_Model {
 	$client = exosense_client($this,
 				  'demo:update-config-entry-request',
 				  array('device-id' => $device_id,
-					'config-entries' => array('name' => 'logging',
-						       'val' => $cfg_arr)));
+					'config-entries' =>
+					array(array('name' => 'logging', 'val' => $cfg_arr))));
 
 	$client->send_request();
     }

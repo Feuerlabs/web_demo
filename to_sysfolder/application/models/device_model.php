@@ -111,10 +111,8 @@ class Device_model extends CI_Model {
 						  array('name' => 'retry_interval',
 							'val' => $retry_interval),
 						  array('name' => 'waypoint_interval',
-							'val' => $waypoint_interval),
-						  array('name' => 'logging',
-							'val' => array())
-						)), FALSE);
+							'val' => $waypoint_interval)
+						)) , FALSE);
 
 	if (!$res) {
 	    log_message('debug', 'DeviceModel::create(): send_request(upd-cfg): Failed');
@@ -177,7 +175,8 @@ class Device_model extends CI_Model {
 				      'demo:update-config-entry-request',
 				      array('device-id' => $device_id,
 					    'config-entries' =>
-					    array(array('name' => 'waypoint_interval',
+					    array(
+						  array('name' => 'waypoint_interval',
 							'val' => $waypoint_interval),
 						  array('name' => 'can_bus_speed',
 							'val' => $can_bus_speed),
@@ -188,7 +187,7 @@ class Device_model extends CI_Model {
 						  array('name' => 'retry_interval',
 							'val' => $retry_interval),
 						  array('name' => 'waypoint_interval',
-							'val' => $waypoint_interval),
+							'val' => $waypoint_interval)
 						)), FALSE);
 	$client->send_request();
 	$res = $client->get_response_object();

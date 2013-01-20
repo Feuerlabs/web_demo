@@ -1,5 +1,7 @@
+</div>
 <div id="footer">
-<strong>&copy; 2012 Feuerlabs, Inc</strong>
+&copy; 2012 Feuerlabs, Inc
+</div>
 </div>
 </div>
 </body>

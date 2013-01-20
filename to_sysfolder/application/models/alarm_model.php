@@ -78,8 +78,8 @@ class Alarm_model extends CI_Model {
 	$client = exosense_client($this,
 				  'demo:update-config-entry-request',
 				  array('device-id' => $device_id,
-					'config-entries' => array('name' => 'alarm',
-						       'val' => $cfg_arr)));
+					'config-entries' =>
+					array(array('name' => 'alarm', 'val' => $cfg_arr))));
 
 	$client->send_request();
     }

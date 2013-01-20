@@ -37,6 +37,7 @@ class Waypoint extends CI_Controller {
 
 	$data['title'] = "View Waypoints";
 	$this->load->view('waypoint/view', $data);
+
     }
 
     public function download($dev_id)
