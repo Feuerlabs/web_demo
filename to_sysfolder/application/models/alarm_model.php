@@ -68,20 +68,19 @@ class Alarm_model extends CI_Model {
 	$this->load->library('jsonrpc');
 	$this->load->helper('exosense'); // For the exosense_client
 	$alarm_spec_arr = $this->view($device_id);
-	$cfg_arr = array();
 	foreach($alarm_spec_arr as $alarm_spec) {
-	    $cfg_arr[count($cfg_arr)]= array('can_frame_id' => $alarm_spec['frame_id'],
-					     'trigger_threshold' => $alarm_spec['trigger_threshold'],
-					     'reset_threshold' => $alarm_spec['reset_threshold']);
+	    $client = exosense_client($this,
+				      'demo:update-config-entry-request',
+				      array('device-id' => $device_id,
+					    'config-entries' =>
+					    array(array('name' => 'alarm', 'val' =>
+							array(array('can_frame_id' => $alarm_spec['frame_id'],
+							      'trigger_threshold' => $alarm_spec['trigger_threshold'],
+								    'reset_threshold' => $alarm_spec['reset_threshold']))))));
+	    $client->send_request();
 	}
 
-	$client = exosense_client($this,
-				  'demo:update-config-entry-request',
-				  array('device-id' => $device_id,
-					'config-entries' =>
-					array(array('name' => 'alarm', 'val' => $cfg_arr))));
 
-	$client->send_request();
     }
 }
 

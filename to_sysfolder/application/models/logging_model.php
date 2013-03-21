@@ -49,18 +49,16 @@ class Logging_model extends CI_Model {
 
     public function push($device_id) {
 	$log_spec_arr = $this->view($device_id);
-	$cfg_arr = array();
 	foreach($log_spec_arr as $log_spec) {
-	    $cfg_arr[count($cfg_arr)]= array('can_frame_id' => $log_spec['frame_id'],
-					   'sample_interval' => $log_spec['sample_interval'],
-					   'buffer_size' => $log_spec['buffer_size']);
+	    $client = exosense_client($this,
+				      'demo:update-config-entry-request',
+				      array('device-id' => $device_id,
+					    'config-entries' =>
+					    array(array('name' => 'logging',
+							'val' => array(array('can_frame_id' => $log_spec['frame_id'],
+								       'sample_interval' => $log_spec['sample_interval'],
+									     'buffer_size' => $log_spec['buffer_size']))))));
+	    $client->send_request();
 	}
-	$client = exosense_client($this,
-				  'demo:update-config-entry-request',
-				  array('device-id' => $device_id,
-					'config-entries' =>
-					array(array('name' => 'logging', 'val' => $cfg_arr))));
-
-	$client->send_request();
     }
 }

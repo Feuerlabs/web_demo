@@ -158,8 +158,8 @@ class Device_model extends CI_Model {
 	$client = exosense_client($this,
 				  'exodm:update-device',
 				  array('dev-id' => $device_id,
-					'server-key' => $device_key,
-					'device-key' => $server_key));
+					'server-key' => $server_key,
+					'device-key' => $device_key));
 	$client->send_request();
 	$res = $client->get_response_object();
 	$rescode = 'unknown';

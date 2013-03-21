@@ -17,7 +17,6 @@ class Logdata_model extends CI_Model {
 		$dbts = date('Y-m-d H:i:s', $ts[0]).'.'.substr($ts[1],0,3);
 	    else
 		$dbts = date('Y-m-d H:i:s', $logdata[$i]['ts']);
-
 	    log_message('debug', 'Logdata::store(1): ts('.$dbts.')');
 	    if (!$this->db->insert('log_entry',
 				   array('device_id' => $device_id,
@@ -39,24 +38,16 @@ class Logdata_model extends CI_Model {
 	$this->db->select_max('can_value', 'max_val');
 	$this->db->select_min('ts', 'min_ts');
 	$this->db->select_max('ts', 'max_ts');
-	$summary = $this->db->get('log_entry')->result_array();
-	$summary = $summary[0];
+	$tmp = $this->db->get('log_entry')->result_array();
+	$summary = $tmp[0];
 
 	// No records retrieved
-	if (!$summary['min_val']) {
-	    $summary['min_val'] = 'n/a';
-	    $summary['max_val'] = 'n/a';
-	    $summary['min_ts'] = 'n/a';
-	    $summary['max_ts'] = 'n/a';
-	    $summary['count'] = 0;
-	} else {
-	    // Get number of records
-	    $this->db->select('count(device_id)', FALSE);
-	    $this->db->where('device_id', $device_id);
-	    $this->db->where('frame_id', $can_frame_id);
-	    $count = $this->db->get('log_entry')->result_array();
-	    $summary['count'] = $count[0]['count'];
-	}
+	// Get number of records
+	$this->db->select('count(device_id)', FALSE);
+	$this->db->where('device_id', $device_id);
+	$this->db->where('frame_id', $can_frame_id);
+	$count = $this->db->get('log_entry')->result_array();
+	$summary['count'] = $count[0]['count'];
 
 	// Retrieve alarms.
 	$this->db->where('device_id', $device_id);

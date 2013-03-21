@@ -21,7 +21,7 @@ class Exosense extends CI_Controller {
 
 	    'demo:process-alarms' => array('function' => 'Exosense._process_alarms',
 				    'parameters' => array(array('name' => 'device-id'),
-							  array('name' => 'alarmdata')),
+							  array('name' => 'alarms')),
 				     'summary' => 'Processes logging entries from a device.'));
 
 	$this->server->define_methods($methods);
@@ -81,7 +81,7 @@ class Exosense extends CI_Controller {
 	$this->load->model('alarmdata_model');
 	log_message('debug', 'Exosense::process_alarmdata(): '.print_r($arg, TRUE));
 
-	$res = $this->alarmdata_model->store($arg['device-id'], $arg['alarmdata']);
+	$res = $this->alarmdata_model->store($arg['device-id'], $arg['alarms']);
 
 	if ($res)
 	    return $this->server->send_response(array('result' => '0'));
