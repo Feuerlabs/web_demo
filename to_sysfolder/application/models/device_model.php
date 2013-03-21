@@ -23,8 +23,8 @@ class Device_model extends CI_Model {
     {
 	log_message('debug', 'DeviceModel::create()');
 	$client = exosense_client($this,
-				  'exodm:provision-device',
-				  array('dev-id' => $device_id,
+				  'exodm:create-device',
+				  array('device-id' => $device_id,
 					'device-type' => $device_type,
 					'server-key' => $server_key ,
 					'device-key' => $device_key));
@@ -75,7 +75,7 @@ class Device_model extends CI_Model {
 	//
 	$client->method('exodm:add-config-set-members');
 	$client->request(array('name' => array($device_id),
-			       'dev-id' => array($device_id)));
+			       'device-id' => array($device_id)));
 
 	$res = $client->send_request();
 	if (!$res) {
@@ -157,7 +157,7 @@ class Device_model extends CI_Model {
 	// Update device and server key.
 	$client = exosense_client($this,
 				  'exodm:update-device',
-				  array('dev-id' => $device_id,
+				  array('device-id' => $device_id,
 					'server-key' => $server_key,
 					'device-key' => $device_key));
 	$client->send_request();
@@ -234,7 +234,7 @@ class Device_model extends CI_Model {
 	// Traverse the list
 	foreach($devarr as $key => $device) {
 	    // Load db description for the current device.
-	    $this->db->where('device_id', $device['dev-id']);
+	    $this->db->where('device_id', $device['device-id']);
 	    $res = $this->db->get('device');
 
 	    if ($res->num_rows() > 0) {
@@ -269,7 +269,7 @@ class Device_model extends CI_Model {
     {
 	$client = exosense_client($this,
 				  'exodm:lookup-device',
-				  array('dev-id' => $dev_id));
+				  array('device-id' => $dev_id));
 
 	$res = $client->send_request();
 	if (!$res) {
@@ -279,11 +279,11 @@ class Device_model extends CI_Model {
 	$res = $client->get_response_object();
 
 	$device = $res['result']['devices'][0];
-	$device['devid'] = $device['dev-id'];
+	$device['devid'] = $device['device-id'];
 	$device['device_type'] = $device['device-type'];
 
 	// Load db description for the current device.
-	$this->db->where('device_id', $device['dev-id']);
+	$this->db->where('device_id', $device['device-id']);
 	$query = $this->db->get('device');
 	if ($query->num_rows()  == 0) {
 	    $device['description'] = '??';
@@ -340,8 +340,8 @@ class Device_model extends CI_Model {
 
 	// Send config request
 	$res = exosense_request_reuse($client,
-				      'exodm:deprovision-devices',
-				      array('dev-id' => array($device_id)), FALSE);
+				      'exodm:delete-devices',
+				      array('device-id' => array($device_id)), FALSE);
 	$client->send_request();
 	$res = $client->get_response_object();
 

@@ -15,7 +15,7 @@ class Logging_model extends CI_Model {
 			   $sample_interval,
 			   $buffer_size)
     {
-	log_message('debug', 'LoggingModel::create():'.$device_id.' '.$can_fram_id);
+	log_message('debug', 'LoggingModel::create():'.$device_id.' '.$can_frame_id);
 	$this->db->insert('log_specification',
 			  array('device_id' => $device_id,
 				'frame_id' => $can_frame_id,
