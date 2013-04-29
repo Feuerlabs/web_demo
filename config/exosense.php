@@ -17,6 +17,6 @@
 $config['exosense_url']	= 'https://vps.ulf.wiger.net:8088/ck3/rpc';
 $config['exosense_user'] = 'exosense_user';
 $config['exosense_password'] = 'exosense_password';
-$config['exosense_yang_file'] = 'demo.yang';
+$config['exosense_yang_file'] = 'thinkdemo.yang';
 $config['exosense_notification_url'] = 'http://localhost:9123';
 $config['exosense_timeout'] = 30;

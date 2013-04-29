@@ -30,7 +30,7 @@ class Device_model extends CI_Model {
 					'device-key' => $device_key));
 	$res = $client->send_request();
 	if (!$res) {
-	    log_message('debug', 'DeviceModel::create(): send_request(provision): Failed: '.$client->get_response()->error_code);
+	    log_message('debug', 'DeviceModel::create(): send_request(provision 1): Failed: '.$client->get_response()->error_code);
 	    return FALSE;
 	}
 
@@ -38,8 +38,8 @@ class Device_model extends CI_Model {
 	$res = $client->get_response_object();
 	if (!array_key_exists('result', $res) ||
 	    !array_key_exists('result', $res['result']) ||
-	    ($res_code = $res['result']['result']) != '0') {
-	    log_message('debug', 'DeviceModel::create(): send_request(provision): Failed: '.$client->get_response()->error_message);
+	    ($res_code = $res['result']['result']) != 'ok') {
+	    log_message('debug', 'DeviceModel::create(): send_request(provision 2): Failed: '.$client->get_response()->error_message);
 	    return FALSE;
 	}
 
@@ -63,7 +63,7 @@ class Device_model extends CI_Model {
 	$rescode = 'unknown';
 	if (!array_key_exists('result', $res) ||
 	    !array_key_exists('result', $res['result']) ||
-	    ($res_code = $res['result']['result']) != '0') {
+	    ($res_code = $res['result']['result']) != 'ok') {
 	    log_message('debug', 'DeviceModel::create(): send_request(cfg-set): Failed: '.$client->get_response()->error_message.' Result code": '.$rescode);
 
 	    return FALSE;
@@ -88,7 +88,7 @@ class Device_model extends CI_Model {
 	$rescode = 'unknown';
 	if (!array_key_exists('result', $res) ||
 	    !array_key_exists('result', $res['result']) ||
-	    ($res_code = $res['result']['result']) != '0') {
+	    ($res_code = $res['result']['result']) != 'ok') {
 	    log_message('debug', 'DeviceModel::create(): send_request(cfg-add): Failed: '.$client->get_response()->error_message.' Result code": '.$rescode);
 	    return FALSE;
 	}
@@ -97,7 +97,7 @@ class Device_model extends CI_Model {
 	// Invoke the update-config-entry-request
 	//
 	$res = exosense_request_reuse($client,
-				      'demo:update-config-entry-request',
+				      'thinkdemo:update-config-entry-request',
 				      array('device-id' => $device_id,
 					    'config-entries' =>
 					    array(array('name' => 'waypoint_interval',
@@ -124,7 +124,7 @@ class Device_model extends CI_Model {
 	$rescode = 'unknown';
 	if (!array_key_exists('result', $res) ||
 	    !array_key_exists('result', $res['result']) ||
-	    ($res_code = $res['result']['result']) != '0') {
+	    ($res_code = $res['result']['result']) != 'ok') {
 	    log_message('debug', 'DeviceModel::create(): send_request(upd-cfg): Failed: '.$client->get_response()->error_message.' Result code": '.$rescode);
 //	    return FALSE; // While waiting for this to be implemented
 	}
@@ -165,14 +165,14 @@ class Device_model extends CI_Model {
 	$rescode = 'unknown';
 	if (!array_key_exists('result', $res) ||
 	    !array_key_exists('result', $res['result']) ||
-	    ($res_code = $res['result']['result']) != '0') {
+	    ($res_code = $res['result']['result']) != 'ok') {
 	    log_message('debug', 'DeviceModel::update(): send_request(upd-device): Failed: '.$client->get_response()->error_message.' Result code": '.$rescode);
 	    return FALSE;
 	}
 
 	// Send config request
 	$res = exosense_request_reuse($client,
-				      'demo:update-config-entry-request',
+				      'thinkdemo:update-config-entry-request',
 				      array('device-id' => $device_id,
 					    'config-entries' =>
 					    array(
@@ -194,7 +194,7 @@ class Device_model extends CI_Model {
 	$rescode = 'unknown';
 	if (!array_key_exists('result', $res) ||
 	    !array_key_exists('result', $res['result']) ||
-	    ($res_code = $res['result']['result']) != '0') {
+	    ($res_code = $res['result']['result']) != 'ok') {
 	    log_message('debug', 'DeviceModel::update(): send_request(upd-cfg-req): Failed: '.$client->get_response()->error_message.' Result code": '.$rescode);
 //	    return FALSE; // While waiting for this to be implemented
 	}

@@ -51,7 +51,7 @@ class Logging_model extends CI_Model {
 	$log_spec_arr = $this->view($device_id);
 	foreach($log_spec_arr as $log_spec) {
 	    $client = exosense_client($this,
-				      'demo:update-config-entry-request',
+				      'thinkdemo:update-config-entry-request',
 				      array('device-id' => $device_id,
 					    'config-entries' =>
 					    array(array('name' => 'logging',

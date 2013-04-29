@@ -70,7 +70,7 @@ class Alarm_model extends CI_Model {
 	$alarm_spec_arr = $this->view($device_id);
 	foreach($alarm_spec_arr as $alarm_spec) {
 	    $client = exosense_client($this,
-				      'demo:update-config-entry-request',
+				      'thinkdemo:update-config-entry-request',
 				      array('device-id' => $device_id,
 					    'config-entries' =>
 					    array(array('name' => 'alarm', 'val' =>
