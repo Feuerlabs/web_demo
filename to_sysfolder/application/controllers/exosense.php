@@ -10,16 +10,16 @@ class Exosense extends CI_Controller {
 
         $this->server = &$this->jsonrpc->get_server();
         $methods = array(
-	    'demo:process-waypoints' => array('function' => 'Exosense._process_waypoints',
+	    'thinkdemo:process-waypoints' => array('function' => 'Exosense._process_waypoints',
 					 'parameters' => array(array('name' => 'device-id'),
 							       array('name' => 'waypoints')),
 					 'summary' => 'Processes waypoints from a device.'),
-	    'demo:process-logdata' => array('function' => 'Exosense._process_logdata',
+	    'thinkdemo:process-logdata' => array('function' => 'Exosense._process_logdata',
 				    'parameters' => array(array('name' => 'device-id'),
 							  array('name' => 'logdata')),
 				    'summary' => 'Processes logging entries from a device.'),
 
-	    'demo:process-alarms' => array('function' => 'Exosense._process_alarms',
+	    'thinkdemo:process-alarms' => array('function' => 'Exosense._process_alarms',
 				    'parameters' => array(array('name' => 'device-id'),
 							  array('name' => 'alarms')),
 				     'summary' => 'Processes logging entries from a device.'));
